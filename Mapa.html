@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa de Reciclagem</title>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      height: 0vh;
+      width: 100%;
+    }
+
+    .popup-content {
+      font-size: 14px;
+    }
+
+    .popup-content h3 {
+      margin: 0;
+      font-size: 16px;
+      color: #2d5f2e;
+    }
+
+    .popup-content ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Inicializa o mapa
+    const map = L.map('map').setView([-23.55052, -46.633308], 12);
+
+    // Adiciona um tile layer (fundo do mapa)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Lista ampliada de pontos de reciclagem
+    const recyclingPoints = [
+      { name: "Ponto de Reciclagem A", coords: [-23.55052, -46.633308], materials: ["Papel", "Plástico", "Vidro"] },
+      { name: "Ponto de Reciclagem B", coords: [-23.55511, -46.645554], materials: ["Metal", "Eletrônicos"] },
+      { name: "Ponto de Reciclagem C", coords: [-23.567228, -46.648702], materials: ["Papel", "Baterias", "Orgânicos"] },
+      { name: "Ponto de Reciclagem D", coords: [-23.56234, -46.624708], materials: ["Plástico", "Óleo de cozinha"] },
+      { name: "Ponto de Reciclagem E", coords: [-23.57022, -46.622901], materials: ["Eletrodomésticos", "Pilhas"] },
+      { name: "Ponto de Reciclagem F", coords: [-23.55191, -46.640339], materials: ["Vidro", "Metal", "Papel"] },
+      { name: "Ponto de Reciclagem G", coords: [-23.55973, -46.631432], materials: ["Eletrônicos", "Papelão"] },
+      { name: "Ponto de Reciclagem H", coords: [-23.54845, -46.638877], materials: ["Têxteis", "Madeira"] },
+      { name: "Ponto de Reciclagem I", coords: [-23.55315, -46.642980], materials: ["Medicamentos vencidos"] },
+      { name: "Ponto de Reciclagem J", coords: [-23.55245, -46.634837], materials: ["Lâmpadas fluorescentes"] }
+    ];
+
+    // Adiciona os marcadores ao mapa
+    recyclingPoints.forEach(point => {
+      const popupContent = `
+        <div class="popup-content">
+          <h3>${point.name}</h3>
+          <p><strong>Materiais aceitos:</strong></p>
+          <ul>
+            ${point.materials.map(material => `<li>${material}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+      L.marker(point.coords).addTo(map).bindPopup(popupContent);
+    });
+  </script>
+</body>
+</html>

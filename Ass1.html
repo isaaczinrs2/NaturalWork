@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compra de Produtos</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.product {
+  display: flex;
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.product-images {
+  display: flex;
+}
+
+.product-images img {
+  width: 200px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.product-info {
+  padding: 20px;
+}
+
+.product-info h2 {
+  margin-top: 0;
+}
+
+.price {
+  color: green;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.btn {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+/* Estilos do modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #4CAF50;
+            padding: 10px;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+  </style>
+</head>
+<body>
+
+    <center>
+    <h1>Compra de produto</h1>
+    </center>
+  <div class="product">
+    <div class="product-images">
+      <img src="imagens/Ass1.jpeg" alt="Product Image 1">
+    </div>
+    <div class="product-info">
+      <h2>Assinatura Básica</h2>
+      <p>Descrição do Produto</p>
+      <p class="price">R$7,99/Mês</p>
+      <button class="btn" onclick="showCheckout()">Comprar Agora</button>
+    </div>
+  </div>
+
+  <div id="checkout" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="hideCheckout()">&times;</span>
+      <h2>Preencha os Detalhes da Compra</h2>
+      <form>
+        <label for="payment-method">Método de Pagamento:</label>
+        <select id="payment-method">
+          <option value="credit">Crédito</option>
+          <option value="debit">Débito</option>
+          <option value="pix">PIX</option>
+        </select>
+        <a class="btn" href="CompraFinalizada.html">Finalizar</a>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function showCheckout() {
+      document.getElementById("checkout").style.display = "block";
+    }
+
+    function hideCheckout() {
+      document.getElementById("checkout").style.display = "none";
+    }
+  </script>
+</body>
+</html>

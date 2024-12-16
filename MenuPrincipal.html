@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="imagens/NW - Icon.jpeg" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Work</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; /* Fundo suave */
+            color: #000; /* Texto preto */
+        }
+
+        header {
+            background-color: #009d71;
+            border: 2px solid #026842;
+            padding: 20px 0;
+            text-align: center;
+            position: fixed; /* Fixa o cabeçalho */
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            margin-bottom: 8%;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #fff; /* Texto do cabeçalho branco */
+        }
+
+        .container {
+            padding: 80px 20px; /* Adiciona espaço para o cabeçalho fixo */
+        }
+
+        .section {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+            min-height: 150px; /* Altura mínima para evitar corte */
+            overflow: hidden; /* Oculta o excesso */
+            
+        }
+
+        .section img {
+            width: 80%;
+            height: 80%; /* Ajusta a altura */
+            object-fit: cover; /* Ajusta a imagem */
+            border: 3px solid;
+            cursor: pointer;
+            border-radius:15px ;
+        }
+
+        .sectionA img {
+            border-color: red;
+        }
+
+        .sectionB img {
+            border-color: blue;
+        }
+
+        .sectionC img {
+            border-color: green;
+        }
+
+        .sectionD img {
+            border-color: yellow;
+        }
+
+        .sectionE img {
+            border-color: purple;
+        }
+
+        .section p {
+            margin-top: 10px;
+            font-size: 16px; /* Tamanho da fonte ajustado */
+        }
+
+        .sidebar {
+            display: block;
+            position: fixed;
+            left: -100px; /* Mova completamente para fora da tela */
+            top: 0;
+            height: 100%;
+            width: 60px;
+            background-color: #222;
+            padding: 20px;
+            z-index: 1000;
+            transition: left 0.4s ease; /* Animação suave */
+        }
+
+        .sidebar.open {
+            left: 0; /* Move para dentro da tela */
+        }
+
+        .toggle-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 0;
+        }
+
+        .bar {
+            display: block;
+            width: 30px;
+            height: 4px;
+            background-color: white;
+            margin: 5px auto;
+        }
+
+        .close-button {
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .sidebar img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .sidebar a span {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 80px;
+            transform: translateY(-50%);
+            color: #fff;
+            background-color: #007bff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            white-space: nowrap;
+        }
+
+        .sidebar a:hover span {
+            display: block;
+        }
+
+        /* Estilo para o comportamento de rolagem suave */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Natural Work</h1>
+        <button class="toggle-button" onclick="toggleSidebar()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </button>
+    </header>
+    
+    <div class="sidebar" id="sidebar">
+        <div class="close-button" onclick="toggleSidebar()">←</div>
+        
+        <a href="#sectionB">
+            <img src="imagens/MP - Icon.jpg" alt="Mapa de descarte">
+            <span>Mapa de descarte</span>
+        </a>
+        <a href="#sectionC">
+            <img src="imagens/ES - Icon.jpeg" alt="Educação Sustentável">
+            <span>Educação Sustentável</span>
+        </a>
+        <a href="#sectionD">
+            <img src="imagens/CA - Icon.jpg" alt="Calculadora de Carbono">
+            <span>Calculadora de Carbono</span>
+        </a>
+        <a href="#sectionE">
+            <img src="imagens/MS - Icon.jpeg" alt="Mercado Sustentável">
+            <span>Mercado Sustentável</span>
+        </a>
+        <a href="#sectionF">
+            <img src="imagens/AN - Icon.jpeg" alt="Assinaturas da Natureza">
+            <span>Assinaturas da Natureza</span>
+            <a href="#sectionA">
+                <img src="imagens/NC - Icon.jpeg" alt="Nosso Compromisso">
+                <span>Nosso Compromisso</span>
+            </a>
+        </a>
+    </div>
+    
+   
+        <div class="section sectionB" id="sectionB">
+            <a href="Mapa.html">
+                <img src="imagens/Mapa - Painel.png" alt="Mapa de Descarte">
+            </a>
+            <p>Mapa de Descarte: Mostra os pontos de coleta e reciclagem de resíduos na sua região, ajudando a descartar materiais de forma correta e sustentável.</p>
+        </div>
+        <div class="section sectionC" id="sectionC">
+            <a href="EducaçãoSustentável.html">
+                <img src="imagens/Educação - Painel.png" alt="Educação Sustentável">
+            </a>
+            <p>Educação Sustentável: Nesta seção, você terá acesso a palestras de nossos parceiros e cursos desenvolvidos para aprimorar seu conhecimento em sustentabilidade. Além disso, você poderá ser recompensado pela participação em cursos e palestras, incentivando seu aprendizado contínuo.</p>
+        </div>
+        <div class="section sectionD" id="sectionD">
+            <a href="Calculadora.html">
+                <img src="imagens/Calculadora - Painel.png" alt="Calculadora">
+            </a>
+            <p>Calculadora de Carbono: Calcula a quantidade de CO2 que você emite anualmente, ajudando a identificar formas de reduzir seu impacto ambiental.</p>
+        </div>
+        <div class="section sectionE" id="sectionE">
+            <a href="MercadoSustentável.html">
+                <img src="imagens/Mercado - Painel.png" alt="Mercado">
+            </a>
+            <p>Mercado Sustentável: Nessa repartição, você pode acessar nossa loja feita inteiramente de produtos reciclados ou que envolvem o meio ambiente de alguma maneira, com preços acessíveis. Além disso, você pode fazer uma assinatura para obter descontos na loja, cursos, na comunidade e em outras ofertas.</p>
+        </div>
+        <div class="section sectionF" id="sectionF">
+            <a href="AssinaturasdaNatureza.html">
+                <img src="imagens/Assinatura - Painel.png" alt="Assinaturas da Natureza">
+            </a>
+            <p>Assinaturas da Natureza: Aqui você pode se tornar um sócio do nosso site. Pagando as assinaturas mensais, você tem direito a descontos na nossa loja, desafios semanais para participar, apoio à sua comunidade e outros benefícios.</p>
+        </div>
+        <div class="container">
+            <div class="section sectionA" id="sectionA">
+                <a href="NossoCompromisso.html">
+                    <img src="imagens/Sobre - Painel.png" alt="Nosso Compromisso">
+                </a>
+                <p>Nosso Compromisso: Nesta seção, você encontrará informações relevantes sobre nossa missão, valores, meios de contato e fontes de pesquisa. Conheça mais sobre o que nos motiva a promover a sustentabilidade.</p>
+            </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

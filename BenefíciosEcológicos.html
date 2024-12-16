@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recompensas e Notícias</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f9;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+        }
+        .camera-icon {
+            cursor: pointer;
+            font-size: 20px;
+            background: #555;
+            padding: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            color: #fff;
+        }
+        .camera-icon:hover {
+            background: #777;
+        }
+        .level-bar {
+            cursor: pointer;
+            background: #555;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            display: inline-block;
+        }
+        .level-bar:hover {
+            background: #777;
+        }
+        /* Estilo do modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s;
+        }
+        .modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+        }
+        .modal-content h2 {
+            margin-bottom: 20px;
+        }
+        .modal-content span {
+            display: block;
+            margin: 10px 0;
+            font-size: 16px;
+            position: relative;
+        }
+        .modal-content span:hover::after {
+            content: attr(data-reward);
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        .close-btn {
+            background: #ff4b5c;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .close-btn:hover {
+            background: #ff0000;
+        }
+        main {
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-images img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .carousel-description {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .carousel-controls button {
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .carousel-controls button:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="camera-icon" onclick="showCameraModal()">📷</div>
+        <div class="level-bar" onclick="showLevelModal()">Nível: 5</div>
+    </header>
+    <div class="modal" id="levelModal">
+        <div class="modal-content">
+            <h2>Recompensas por Nível</h2>
+            <span data-reward="Recompensa: Emblema Inicial">Nível 0</span>
+            <span data-reward="Recompensa: Desconto Especial">Nível 5</span>
+            <span data-reward="Recompensa: Acesso Exclusivo">Nível 10</span>
+            <span data-reward="Recompensa: Presente Especial">Nível 20</span>
+            <button class="close-btn" onclick="closeModal('levelModal')">Fechar</button>
+        </div>
+    </div>
+    <div class="modal" id="cameraModal">
+        <div class="modal-content">
+            <h2>Enviar Imagem</h2>
+            <form onsubmit="handleFileUpload(event)">
+                <label for="fileInput">Escolha uma imagem:</label>
+                <input type="file" id="fileInput" accept="image/*" required><br><br>
+                <label for="descriptionInput">Descrição:</label>
+                <textarea id="descriptionInput" rows="3" placeholder="Digite uma descrição..." required></textarea><br><br>
+                <button type="submit" class="close-btn">Enviar</button>
+            </form>
+        </div>
+    </div>
+    <main>
+        <div class="carousel">
+            <div class="carousel-images" id="carouselImages">
+                <img src="https://via.placeholder.com/800x400?text=Notícia+1" alt="Notícia 1">
+                <img src="https://via.placeholder.com/800x400?text=Notícia+2" alt="Notícia 2">
+                <img src="https://via.placeholder.com/800x400?text=Notícia+3" alt="Notícia 3">
+            </div>
+            <div class="carousel-controls">
+                <button onclick="prevSlide()">❮</button>
+                <button onclick="nextSlide()">❯</button>
+            </div>
+        </div>
+        <div class="carousel-description" id="carouselDescription">
+            Você sabia que 1000 pilhas podem matar um ecossistema inteiro se mal descartadas?
+        </div>
+    </main>
+    <script>
+        function showLevelModal() {
+            document.getElementById('levelModal').classList.add('active');
+        }
+        function showCameraModal() {
+            document.getElementById('cameraModal').classList.add('active');
+        }
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+        function handleFileUpload(event) {
+            event.preventDefault();
+            alert("Arquivo enviado com sucesso!");
+            closeModal('cameraModal');
+        }
+        const images = [
+            {
+                src: "https://via.placeholder.com/800x400?text=Notícia+1",
+                desc: "Você sabia que 1000 pilhas podem matar um ecossistema inteiro se mal descartadas?"
+            },
+            {
+                src: "https://via.placeholder.com/800x400?text=Notícia+2",
+                desc: "Plantar árvores melhora a qualidade do ar e combate as mudanças climáticas."
+            },
+            {
+                src: "https://via.placeholder.com/800x400?text=Notícia+3",
+                desc: "Economizar água em casa pode salvar até 50 litros por dia."
+            }
+        ];
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            const carouselImages = document.getElementById('carouselImages');
+            const carouselDescription = document.getElementById('carouselDescription');
+            carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
+            carouselDescription.textContent = images[currentIndex].desc;
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateCarousel();
+        }
+    </script>
+</body>
+</html>

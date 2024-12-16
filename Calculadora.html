@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculadora de Pegada de Carbono para medir seu impacto ambiental e descobrir maneiras de reduzi-lo.">
+  <title>Calculadora de Pegada de Carbono</title>
+  <style>
+    /* Estilo geral */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+    }
+    header {
+      background-color: #009d71;
+      border: 2px solid #026842;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 0;
+    }
+    main {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #2d5f2e;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #256426;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #e9f7ea;
+      border-left: 4px solid #2d5f2e;
+    }
+    .back-button {
+     position: absolute;
+     top: 20px;
+     left: 10px;
+     color: #fff;
+     font-size: 24px;
+     cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="MenuPrincipal.html"> <div class="back-button">&#8592;</div></a>
+    <h1>Calculadora de Pegada de Carbono</h1>
+  </header>
+  <main>
+    <h2>Insira suas informações</h2>
+    <form id="carbonForm">
+      <label for="transport">Quantos km você percorre por dia? (Carro)</label>
+      <input type="number" id="transport" placeholder="Ex.: 20" required>
+
+      <label for="meat">Quantas refeições com carne você faz por semana?</label>
+      <input type="number" id="meat" placeholder="Ex.: 10" required>
+
+      <label for="electricity">Qual é o seu consumo médio mensal de energia? (kWh)</label>
+      <input type="number" id="electricity" placeholder="Ex.: 200" required>
+
+      <label for="flights">Quantos voos você pega por ano?</label>
+      <input type="number" id="flights" placeholder="Ex.: 2" required>
+
+      <button type="button" onclick="calculateCarbon()">Calcular</button>
+    </form>
+    <div id="result" class="result" style="display: none;"></div>
+  </main>
+
+  <script>
+    function calculateCarbon() {
+      // Capturar os valores do formulário
+      const transport = parseFloat(document.getElementById("transport").value) || 0;
+      const meat = parseInt(document.getElementById("meat").value) || 0;
+      const electricity = parseFloat(document.getElementById("electricity").value) || 0;
+      const flights = parseInt(document.getElementById("flights").value) || 0;
+
+      // Cálculos básicos (valores fictícios em kg de CO2)
+      const transportImpact = transport * 0.2 * 365; // 0.2 kg CO2/km
+      const meatImpact = meat * 7 * 27; // 27 kg CO2/refeição semanal
+      const electricityImpact = electricity * 0.84 * 12; // 0.84 kg CO2/kWh
+      const flightsImpact = flights * 500; // 500 kg CO2/voo
+
+      // Somatório da pegada total
+      const totalImpact = (transportImpact + meatImpact + electricityImpact + flightsImpact).toFixed(2);
+
+      // Exibir o resultado
+      const resultDiv = document.getElementById("result");
+      resultDiv.style.display = "block";
+      resultDiv.innerHTML = `
+        <h3>Sua pegada de carbono anual é de aproximadamente:</h3>
+        <p><strong>${totalImpact} kg de CO2</strong></p>
+        <p>Considere reduzir viagens de carro, consumo de carne ou otimizar seu uso de energia para diminuir seu impacto ambiental.</p>
+      `;
+    }
+  </script>
+</body>
+</html>

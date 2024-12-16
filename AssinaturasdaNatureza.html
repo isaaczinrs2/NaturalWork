@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assinaturas de Natureza</title>
+    <style>
+        /* Estilos gerais */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Contêiner principal */
+        .assinaturas {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        /* Estilos para cada plano */
+        .plano {
+            text-align: center;
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            width: 30%;
+            border: 2px solid #444;
+            transition: transform 0.3s ease;
+            height: 500px;
+        }
+
+        .plano:hover {
+            transform: scale(1.05);
+        }
+
+        /* Ícone com animação de pulsação */
+        .icone {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 15px rgba(97, 50, 251, 0.7);
+        }
+
+        /* Animação de pulsação */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Estilos para preço e descrição */
+        .preco {
+            font-size: 24px;
+            color: #fff;
+            text-shadow: 0 0 10px #fff; /* Efeito de brilho */
+        }
+
+        .descricao {
+            font-size: 16px;
+            color: #ccc;
+        }
+
+        /* Estilos para o botão de compra */
+        .botao-compra {
+            background-color: #FFD700; /* Dourado */
+            color: #222; /* Texto escuro */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+            margin-top: 50px;
+        }
+
+        .botao-compra:hover {
+            background-color: #FFC107; /* Efeito hover mais claro */
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 5px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #4CAF50;
+            padding: 10px;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="assinaturas">
+        <div class="plano">
+            <div class="icone">
+                <img src="imagens/Ass1.jpeg" alt="Plano 1" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <h2 class="preco">R$ 7,99/mês</h2>
+            <p class="descricao">Benefícios do Plano 1: Desconto de 5% em todo o nosso Mercado Sustentável, 1 desafio semanal adicional nos Benefícios Ecológicos, aumento de 3% na taxa de ganho de Ecopoints, além de sua comunidade ser recomendada mais vezes para outros usuários.</p>
+            <br><br><br><br><br>
+            <a href="Ass1.html"><button class="botao-compra">Comprar</button></a>
+        </div>
+        <div class="plano">
+            <div class="icone">
+                <img src="imagens/Ass2.jpeg" alt="Plano 2" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <h2 class="preco">R$ 19,99/mês</h2>
+            <p class="descricao">Benefícios do Plano 2: Desconto de 10% em todo o nosso Mercado Sustentável, 2 desafios semanais adicionais nos Benefícios Ecológicos, aumento de 5% na taxa de ganho de Ecopoints, além de sua comunidade ser recomendada mais vezes para outros usuários, por fim, suas mensagens receberam mais destaque no chat global da comunidade verde.</p>
+            <br><br><br>
+            <a href="Ass2.html"><button class="botao-compra">Comprar</button></a>
+        </div>
+        <div class="plano">
+            <div class="icone">
+                <img src="imagens/Ass3.jpeg" alt="Plano 3" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <h2 class="preco">R$ 49,99/mês</h2>
+            <p class="descricao">Benefícios do Plano 3: Desconto de 15% em todo o nosso Mercado Sustentável, 3 desafios semanais adicionais nos Benefícios Ecológicos, aumento de 8% na taxa de ganho de Ecopoints, sua comunidade será recomendada mais vezes para outros usuários, suas mensagens receberam mais destaque no chat global da comunidade verde, todos os cursos serão de graça, e você poderá divulgar seus produtos naturais na nossa loja, tendo 80% de lucro na venda.</p>
+            <a href="Ass3.html"><button class="botao-compra">Comprar</button></a>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript para um efeito simples ao carregar a página
+        window.onload = function() {
+            const planos = document.querySelectorAll('.plano');
+            planos.forEach((plano, index) => {
+                plano.style.opacity = '0';
+                setTimeout(() => {
+                    plano.style.opacity = '1';
+                    plano.style.transition = 'opacity 1s ease';
+                }, index * 300); // Delay para cada plano
+            });
+        };
+    </script>
+</body>
+</html>

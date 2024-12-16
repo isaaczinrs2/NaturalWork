@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educação Sustentável</title>
+    <style>
+        /* Estilos gerais */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Verdana', sans-serif; /* Fonte mais legível */
+            background-image: url('https://example.com/background-image.jpg'); /* Substitua pelo link da imagem de fundo desejada */
+            background-size: cover;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* Contêiner principal */
+        .assinaturas {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            backdrop-filter: blur(10px); /* Efeito de desfoque no fundo */
+        }
+
+        /* Estilos para cada seção */
+        .plano {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semitransparente */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            width: 30%;
+            display: flex;
+            flex-direction: column; /* Alinhamento vertical */
+            justify-content: space-between; /* Espaço igual entre os elementos */
+            height: 400px; /* Altura fixa para garantir alinhamento */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transições mais suaves */
+        }
+
+        .plano:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Sombra mais intensa ao passar o mouse */
+        }
+
+        /* Ícone com animação de pulsação */
+        .icone {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            border-radius: 50%; /* Tornando redondo */
+            overflow: hidden;
+            animation: pulse 3s infinite;
+            box-shadow: 0 0 8px rgba(97, 50, 251, 0.7);
+            display: flex; /* Usar flexbox para centralizar a imagem */
+            justify-content: center; /* Centralizar horizontalmente */
+            align-items: center; /* Centralizar verticalmente */
+        }
+
+        /* Animação de pulsação */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Estilos para preço e descrição */
+        .preco {
+            font-size: 24px;
+            color: #333;
+            text-shadow: 0 0 5px #fff; /* Efeito de brilho */
+        }
+
+        .descricao {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6; /* Aumenta o espaçamento entre linhas */
+            margin: 10px 0; /* Margem superior e inferior */
+            padding: 0 10px; /* Padding para as laterais */
+            flex-grow: 1; /* Faz o texto crescer para ocupar espaço */
+            overflow-y: auto; /* Permite rolagem vertical */
+            max-height: 120px; /* Altura máxima para a barra de rolagem */
+            position: relative; /* Para o pseudo-elemento */
+        }
+
+        /* Estilo para o texto que indica que há mais conteúdo */
+        .descricao::after {
+            content: '...'; /* Indica que há mais texto */
+            position: absolute;
+            bottom: 10px; /* Posição na parte inferior */
+            left: 10px; /* Para alinhar com o texto */
+            color: rgba(102, 102, 102, 0.5); /* Cor mais clara e semi-transparente */
+            transition: color 0.3s; /* Transição suave */
+        }
+
+        .botao-compra {
+            background-color: #FFD700; /* Dourado */
+            color: #222; /* Texto escuro */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+            margin-top: auto; /* Empurra o botão para o final da seção */
+            width: 100%; /* Botão ocupa toda a largura disponível */
+        }
+
+        .botao-compra:hover {
+            background-color: #FFC107; /* Efeito hover mais claro */
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 5px;
+            color: #333;
+            font-size: 24px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        /* Estilos para a seção de palestras e cursos */
+        .secao {
+            margin: 20px 0;
+        }
+
+        .titulo-secao {
+            font-size: 24px;
+            color: #4a4a4a;
+            margin: 10px 0; /* Margem para separação */
+            text-decoration: none; /* Remove a linha do link */
+        }
+
+        .subtitulo {
+            font-size: 18px;
+            color: #555;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <a href="MenuPrincipal.html"><div class="back-button">&#8592;</div></a>
+    <div class="assinaturas">
+        <!-- Seção de Cursos -->
+        <div class="plano">
+            <div class="icone">
+                <img src="imagens/Forms icon.jpg" alt="Cursos" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"> <!-- Imagem redonda -->
+            </div>
+            <div class="titulo-secao">Cursos</div> <!-- Texto simples -->
+            <p class="descricao">Os cursos oferecidos têm como objetivo fornecer um aprendizado profundo e prático sobre diversos temas relevantes e atuais. Com uma abordagem didática e interativa, os participantes poderão explorar conteúdos que vão desde a introdução a conceitos básicos até a especialização em áreas específicas. Cada curso é desenvolvido por especialistas da indústria, proporcionando uma experiência enriquecedora e alinhada com as demandas do mercado. Ao concluir cada curso, os alunos receberão um certificado que comprova suas habilidades e conhecimentos adquiridos.</p>
+            <button class="botao-compra" onclick="window.location.href='Cursos.html';">Saiba Mais</button> <!-- Redireciona para Cursos.html -->
+        </div>
+
+        <!-- Seção de Palestras -->
+        <div class="plano">
+            <div class="icone">
+                <img src="imagens/Youtube Icon.png" alt="Palestras" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"> <!-- Imagem redonda -->
+            </div>
+            <div class="titulo-secao">Palestras</div> <!-- Texto simples -->
+            <p class="descricao">As palestras são eventos inspiradores que reúnem especialistas renomados de diversas áreas para compartilhar experiências e conhecimentos sobre temas contemporâneos. Durante as palestras, os participantes terão a oportunidade de ouvir histórias de sucesso e discutir tendências de mercado. Após cada palestra, haverá sessões de perguntas e respostas, promovendo interação e networking entre os participantes.</p>
+            <button class="botao-compra" onclick="window.location.href='Palestras.html';">Saiba Mais</button> <!-- Redireciona para Palestras.html -->
+        </div>
+
+        <!-- Seção de Somatória -->
+        <div class="plano">
+            <h2 class="preco">Conteúdo Visto no Geral</h2>
+            <p class="subtitulo">Total de conteúdo visto: <span id="total-conteudo">0</span></p>
+            <h3 class="titulo-secao">Cursos Feitos</h3>
+            <p class="subtitulo">Número de cursos feitos: <span id="num-cursos">0</span></p>
+            <h3 class="titulo-secao">Palestras Vistas</h3>
+            <p class="subtitulo">Número de palestras vistas: <span id="num-palestras">0</span></p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript para um efeito simples ao carregar a página
+        window.onload = function() {
+            const planos = document.querySelectorAll('.plano');
+            planos.forEach((plano, index) => {
+                plano.style.opacity = '0';
+                setTimeout(() => {
+                    plano.style.opacity = '1';
+                    plano.style.transition = 'opacity 1s ease';
+                }, index * 300); // Delay para cada plano
+            });
+
+            // Exemplo de contadores de palestras e cursos
+            const numCursos = 2; // Exemplo de número de cursos vistos
+            const numPalestras = 5; // Exemplo de número de palestras vistas
+            const totalConteudo = numCursos + numPalestras;
+
+            document.getElementById('num-cursos').textContent = numCursos;
+            document.getElementById('num-palestras').textContent = numPalestras;
+            document.getElementById('total-conteudo').textContent = totalConteudo;
+        };
+    </script>
+</body>
+</html>

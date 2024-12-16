@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado Sustentável</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #009d71;
+            border: 2px solid #026842;
+            padding: 10px;
+        }
+        .search-bar {
+            width: 60%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .menu-icon {
+            cursor: pointer;
+            margin-right: 20px;
+            font-size: 24px;
+            color: white;
+        }
+        .discount-button {
+            margin-left: 10px;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+        .discount-button img {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+        }
+        .sidebar {
+            position: fixed;
+            left: -300px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            transition: left 0.3s;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin: 10px 0;
+        }
+        .sidebar h3 {
+            margin-top: 0;
+        }
+        .close-btn {
+            cursor: pointer;
+            font-size: 24px;
+            color: white;
+            margin-bottom: 15px;
+        }
+        .content {
+            padding: 20px;
+            margin-left: 20px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .product-card {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            background-color: white;
+            text-align: center;
+        }
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .product-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .product-link:hover {
+            color: inherit;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="MenuPrincipal.html"> <div class="back-button">&#8592;</div></a>
+        <div class="menu-icon" onclick="toggleSidebar()">☰</div>
+        <input type="text" class="search-bar" id="searchInput" placeholder="Buscar produto..." oninput="filterProducts()">
+        <button class="discount-button" onclick="applyDiscount(0)"><img src="imagens/X.jpeg" alt="0%"></button>
+        <button class="discount-button" onclick="applyDiscount(5)"><img src="imagens/Ass1.jpeg" alt="5%"></button>
+        <button class="discount-button" onclick="applyDiscount(10)"><img src="imagens/Ass2.jpeg" alt="10%"></button>
+        <button class="discount-button" onclick="applyDiscount(15)"><img src="imagens/Ass3.jpeg" alt="15%"></button>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <div class="close-btn" onclick="toggleSidebar()">←</div>
+        <h3>Filtrar por Preço</h3>
+        <a href="#" onclick="filterProducts(20); toggleSidebar()">Até R$20</a>
+        <a href="#" onclick="filterProducts(50); toggleSidebar()">Até R$50</a>
+        <a href="#" onclick="filterProducts(100); toggleSidebar()">Até R$100</a>
+        <a href="#" onclick="filterAbove100(); toggleSidebar()">Acima de R$100</a>
+        <a href="#" onclick="showAllProducts(); toggleSidebar()">Todos os Produtos</a>
+    </div>
+
+    <div class="content">
+        <h1>Catálogo de Produtos</h1>
+        <div class="product-grid" id="product-grid">
+            <!-- Os produtos serão gerados aqui -->
+        </div>
+    </div>
+
+    <script>
+      const products = [
+            { name: "Sacolas reutilizáveis de algodão", description: "Sacolas duráveis e ecológicas, perfeitas para compras, feitas de algodão orgânico.", price: 12.00, img: "imagens/produto 1.jpeg" },
+            { name: "Papel Toalha Reciclado", description: "Conjunto de 50 papéis toalha feitos 100% de papel reciclado, forte e absorvente, ideal para reduzir o desperdício.", price: 7.99, img: "imagens/produto 2.jpeg" },
+            { name: "Papel Filme Biodegradável", description: "Papel filme feito de materiais biodegradáveis, ideal para cobrir alimentos sem agredir o meio ambiente.", price: 9.99, img: "imagens/produto 3.jpeg" },
+            { name: "Talheres de Bambu", description: "Conjunto de talheres feitos de bambu sustentável, perfeito para refeições em casa ou em passeios.", price: 24.90, img: "imagens/produto 4.jpeg" },
+            { name: "Canudos Reutilizáveis de metal", description: "Conjunto de canudos reutilizáveis, disponíveis em metal, uma alternativa ecológica aos canudos descartáveis.", price: 12.99, img: "imagens/produto 5.jpeg" },
+            { name: "Panos de Cozinha de Algodão Orgânico", description: "Panos de cozinha feitos de algodão orgânico, super absorventes e laváveis, perfeitos para uso diário.", price: 17.90, img: "imagens/produto 6.jpeg" },
+            { name: "Camisetas de Algodão Orgânico", description: "Camisetas confortáveis e ecológicas feitas de algodão orgânico, disponíveis em várias cores.", price: 34.90, img: "imagens/produto 7.jpeg" },
+            { name: "Calçados Sustentáveis (Feitos com Materiais Reciclados)", description: "Calçados confortáveis e ecológicos, fabricados com materiais reciclados e sustentáveis.", price: 79.90, img: "imagens/produto 8.jpeg" },
+            { name: "Carteiras de Papel Reciclado", description: "Carteiras feitas de papel reciclado, leves e duráveis, com design moderno e sustentável.", price: 30.00, img: "imagens/produto 9.jpeg" },
+            { name: "Bijuterias Feitas de Materiais Reutilizados", description: "Bijuterias exclusivas, feitas a partir de materiais reutilizados, promovendo a moda sustentável.", price: 24.90, img: "imagens/produto 10.jpeg" },
+            { name: "Óculos de Sol de Madeira", description: "Óculos de sol feitos de madeira reciclada, com design único e proteção UV.", price: 111.99, img: "imagens/produto 11.jpeg" },
+            { name: "Barrinhas de cereal", description: "Barrinhas de cereais orgânicas, nutritivas e deliciosas, perfeitas para um lanche saudável.", price: 7.90, img: "imagens/produto 12.jpeg" },
+            { name: "Caixa de Armazenamento em Bambu", description: "Caixa de armazenamento ecológica, feita de bambu sustentável, perfeita para organizar seus itens com estilo.", price: 69.99, img: "imagens/produto 13.jpeg" },
+            { name: "Conjunto de Panelas de Cerâmica Ecológica", description: "Conjunto de panelas de cerâmica, livre de químicos, ideal para cozinhar de forma saudável e sustentável.", price: 279.99, img: "imagens/produto 14.jpeg" },
+            { name: "Batedeira de Madeira Sustentável", description: "Batedeira artesanal feita de madeira certificada, resistente e ecológica, perfeita para suas receitas.", price: 79.99, img: "imagens/produto 15.jpeg" },
+            { name: "Kit de irrigadores", description: "Sistema de irrigação movido a energia solar, ideal para manter suas plantas saudáveis de forma ecológica.", price: 280.00, img: "imagens/produto 16.jpeg" },
+            { name: "Jaqueta de Material Reciclado", description: "Jaqueta estilosa feita de materiais reciclados, perfeita para quem busca moda sustentável.", price: 189.90, img: "imagens/produto 17.jpeg" },
+            { name: "Cinto de Couro Reciclado", description: "Cinto feito de couro reciclado, com design moderno e sustentável, ideal para qualquer look.", price: 111.10, img: "imagens/produto 18.jpeg" },
+        ];
+
+        function displayProducts(productsToDisplay) {
+            const productGrid = document.getElementById('product-grid');
+            productGrid.innerHTML = ''; // Limpa a grade de produtos
+            productsToDisplay.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}">
+                    <h3><a href="detalhes.html?produto=${encodeURIComponent(product.name)}" class="product-link">${product.name}</a></h3>
+                    <p>${product.description}</p>
+                    <p>R$ ${product.price.toFixed(2)}</p>
+                `;
+                productGrid.appendChild(card);
+            });
+        }
+
+        function renderProducts(productList) {
+            productGrid.innerHTML = "";
+            productList.forEach((product) => {
+                const productCard = `
+                    <div class="product-card">
+                        <a href="${product.link}" class="product-link">
+                            <img src="${product.img}" alt="${product.name}">
+                            <h3>${product.name}</h3>
+                            <p>${product.description}</p>
+                            <p>R$${product.price.toFixed(2)}</p>
+                        </a>
+                    </div>
+                `;
+                productGrid.innerHTML += productCard;
+            });
+        }
+
+        function filterProducts(maxPrice = null) {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const filteredProducts = products.filter(product => {
+                const matchesPrice = maxPrice === null ? true : product.price <= maxPrice;
+                const matchesSearch = product.name.toLowerCase().includes(searchInput) || product.description.toLowerCase().includes(searchInput);
+                return matchesPrice && matchesSearch;
+            });
+            displayProducts(filteredProducts);
+        }
+
+        function filterAbove100() {
+            const filteredProducts = products.filter(product => product.price > 100);
+            displayProducts(filteredProducts);
+        }
+
+        function showAllProducts() {
+            displayProducts(products);
+        }
+
+        function applyDiscount(discount) {
+            if (discount === 0) {
+                products.forEach(product => {
+                    product.price = product.originalPrice || product.price;
+                });
+            } else {
+                products.forEach(product => {
+                    product.originalPrice = product.originalPrice || product.price;
+                    product.price = product.originalPrice * (1 - discount / 100);
+                });
+            }
+            displayProducts(products);
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.style.left = sidebar.style.left === '0px' ? '-300px' : '0px';
+        }
+
+        // Exibe todos os produtos ao carregar a página
+        displayProducts(products);
+    </script>
+
+</body>
+</html>
